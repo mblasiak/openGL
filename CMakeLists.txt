@@ -27,3 +27,4 @@ add_subdirectory(src/Application)
 
 link_libraries(application)
 add_subdirectory(src/Exercises/Triangle)
+add_subdirectory(src/Exercises/HouseTask)
