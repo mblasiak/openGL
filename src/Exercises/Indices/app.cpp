@@ -30,7 +30,8 @@ void SimpleShapeApplication::init() {
             +0.5f, -.5f, 0.0f,   0.5f, 0.3f, 0.4f,
     };
 
-    indices = {0,2, 0,1, 0,3, 1,2 , 3,4, 4,1};
+    indices = {0, 3, 4, 0, 4, 1, 0, 1, 2};
+
     GLuint idx_buffer_handle;
     glGenBuffers(1, &idx_buffer_handle);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, idx_buffer_handle);
@@ -56,9 +57,9 @@ void SimpleShapeApplication::init() {
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat),reinterpret_cast<GLvoid *>(3 * sizeof(GLfloat)));
 
+    glBindVertexArray(0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
 
 
     glClearColor(0.81f, 0.81f, 0.8f, 1.0f);
@@ -72,6 +73,6 @@ void SimpleShapeApplication::init() {
 
 void SimpleShapeApplication::frame() {
     glBindVertexArray(vao_);
-    glDrawElements(GL_LINES, indices.size(), GL_UNSIGNED_SHORT, indices.data());
+    glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, reinterpret_cast<GLvoid *>(0));
     glBindVertexArray(0);
 }
