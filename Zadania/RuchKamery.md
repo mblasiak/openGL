@@ -1,4 +1,4 @@
-#  Porusznie kamerą
+#  Poruszanie kamerą
 
 W poprzednim ćwiczeniu dodaliśmy możliwość "zoomowania", czyli zmiany kąta widzenia kamery za pomocą pokrętła myszy
 . W tym ćwiczeniu dodamy obracanie kamery wokół  centralnego punktu:
