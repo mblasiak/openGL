@@ -31,4 +31,7 @@ add_subdirectory(src/Exercises/HouseTask)
 add_subdirectory(src/Exercises/TriangleColors)
 add_subdirectory(src/Exercises/Indices)
 add_subdirectory(src/Exercises/Uniforms)
+add_subdirectory(src/Exercises/PVM)
+#add_subdirectory(src/Exercises/Pyramid)
+
 
