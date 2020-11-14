@@ -62,11 +62,11 @@ void SimpleShapeApplication::init() {
 
 
     indices = {0, 1, 2,
-               0, 3, 4,
+               3, 0, 4,
                0, 5, 6,
                0, 7, 8,
 
-               9, 10, 11,
+               10, 9, 11,
                12,13,14
 
 
@@ -139,6 +139,10 @@ void SimpleShapeApplication::init() {
 
     glEnable(GL_DEPTH_TEST);
     glUseProgram(program);
+
+    glEnable(GL_CULL_FACE);
+    glFrontFace(GL_CCW);
+    glCullFace(GL_BACK);
 }
 
 void SimpleShapeApplication::frame() {
