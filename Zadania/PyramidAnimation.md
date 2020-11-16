@@ -134,7 +134,7 @@ przy czym `S` to macierz przeskalowywująca księżyc o połowę. Potem rysujemy
 
 ### Satelita
 
-Proszę dodać satelitę obiegającego Ziemię bo kołowej orbicie o promieniu 1.5 o okresie obiegu 2s. Orbita powinna leżeć w płaszczyźnie x-z (jeśli z to kierunek pionowy). 
+Proszę dodać satelitę, czyli kolejną piramidkę tym razem cztery razy mniejszą od oryginalnej, obiegającego Ziemię bo kołowej orbicie o promieniu 1.5 o okresie obiegu 2s. Orbita powinna leżeć w płaszczyźnie x-z (jeśli z to kierunek pionowy). 
 Oznacza to, że oś obrotu orbitalnego to (0,1,0). Satelita powinien obracać się wokół swojej osi, też (0,1,0) z tym samym okresem.    
 
 Proszę tak  ustawić kamerę żeby pokazywała widok "z góry"  znad punktu (0,0,0) obejmujący całą orbitę, tak aby kierunek 'y' był   w kierunku do góry  ekranu. 
