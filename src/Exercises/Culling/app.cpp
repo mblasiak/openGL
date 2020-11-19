@@ -61,7 +61,7 @@ void SimpleShapeApplication::init() {
     };
 
 
-    indices = {0, 1, 2,
+    indices = {0, 2, 1,
                3, 0, 4,
                0, 5, 6,
                0, 7, 8,
