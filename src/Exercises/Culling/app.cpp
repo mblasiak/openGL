@@ -36,28 +36,27 @@ void SimpleShapeApplication::init() {
         std::cout << "Cannot find PVM uniform block in program" << std::endl;
     } else { glUniformBlockBinding(program, u_pvm_index, 1); }
     std::vector<GLfloat> vertices = {
-            0.0f, 0.0f, 0.0f, 0.3f, 0.1f, 0.6f,
+            0.0f, 0.5f, 0.0f, 0.3f, 0.1f, 0.6f,
 
-            0.5f, -0.5f, 0.0f, 0.3f, 0.1f, 0.9f,
-            -0.5f, -0.5f, 0.0f, 0.3f, 0.1f, 0.9f,
+            0.5f, -0.5f, 0.5f, 0.3f, 0.1f, 0.9f,
+            -0.5f, -0.5f, 0.5f, 0.3f, 0.1f, 0.9f,
 
             0.5f, -0.5f, -0.5f, 0.9f, 0.3f, 0.3f,
-            0.5f, -0.5f, 0.0f, 0.9f, 0.3f, 0.3f,
+            0.5f, -0.5f, 0.5f, 0.9f, 0.3f, 0.3f,
 
             -0.5f, -0.5f, -0.5f, 0.8f, 0.8f, 0.9f,
-            -0.5f, -0.5f, 0.0f, 0.8f, 0.8f, 0.9f,
+            -0.5f, -0.5f, 0.5f, 0.8f, 0.8f, 0.9f,
 
             0.5f, -0.5f, -0.5f, 0.8f, 0.2f, 0.9f,
             -0.5f, -0.5f, -0.5f, 0.8f, 0.2f, 0.9f,
 
             0.5f, -0.5f, -0.5f, 0.1f, 0.2f, 0.3f,
             -0.5f, -0.5f, -0.5f, 0.1f, 0.2f, 0.3f,
-            0.5f, -0.5f, 0.0f, 0.1f, 0.2f, 0.3f,
+            0.5f, -0.5f, 0.5f, 0.1f, 0.2f, 0.3f,
 
-            0.5f, -0.5f, 0.0f, 0.1f, 0.2f, 0.3f,
-            -0.5f, -0.5f, 0.0f, 0.1f, 0.2f, 0.3f,
+            0.5f, -0.5f, 0.5f, 0.1f, 0.2f, 0.3f,
+            -0.5f, -0.5f, 0.5f, 0.1f, 0.2f, 0.3f,
             -0.5f, -0.5f, -0.5f, 0.1f, 0.2f, 0.3f,
-
     };
 
 
@@ -67,7 +66,7 @@ void SimpleShapeApplication::init() {
                0, 7, 8,
 
                10, 9, 11,
-               12,13,14
+               12, 13, 14
 
 
     };
@@ -101,7 +100,8 @@ void SimpleShapeApplication::init() {
 
     glm::mat4 M(1.0f);
     glm::mat4 V = glm::lookAt(eye, center, up);
-    glm::mat4 P = glm::perspective(glm::radians(80.0), 16.0 / 9, 0.1, 200.0);
+    double ratio = (double) this->height / (double) this->width;
+    glm::mat4 P = glm::perspective(glm::radians(80.0), ratio, 0.1, 200.0);
 
     glm::mat4 PVM(P * V * M);
     pvm_buff_handle = GLuint(0u);
@@ -141,7 +141,7 @@ void SimpleShapeApplication::init() {
     glUseProgram(program);
 
     glEnable(GL_CULL_FACE);
-    glFrontFace(GL_CCW);
+    glFrontFace(GL_CW);
     glCullFace(GL_BACK);
 }
 

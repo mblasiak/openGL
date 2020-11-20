@@ -36,40 +36,38 @@ void SimpleShapeApplication::init() {
         std::cout << "Cannot find PVM uniform block in program" << std::endl;
     } else { glUniformBlockBinding(program, u_pvm_index, 1); }
     std::vector<GLfloat> vertices = {
-            0.0f, 0.0f, 0.0f, 0.3f, 0.1f, 0.6f,
+            0.0f, 0.5f, 0.0f, 0.3f, 0.1f, 0.6f,
 
-            0.5f, -0.5f, 0.0f, 0.3f, 0.1f, 0.9f,
-            -0.5f, -0.5f, 0.0f, 0.3f, 0.1f, 0.9f,
+            0.5f, -0.5f, 0.5f, 0.3f, 0.1f, 0.9f,
+            -0.5f, -0.5f, 0.5f, 0.3f, 0.1f, 0.9f,
 
             0.5f, -0.5f, -0.5f, 0.9f, 0.3f, 0.3f,
-            0.5f, -0.5f, 0.0f, 0.9f, 0.3f, 0.3f,
+            0.5f, -0.5f, 0.5f, 0.9f, 0.3f, 0.3f,
 
             -0.5f, -0.5f, -0.5f, 0.8f, 0.8f, 0.9f,
-            -0.5f, -0.5f, 0.0f, 0.8f, 0.8f, 0.9f,
+            -0.5f, -0.5f, 0.5f, 0.8f, 0.8f, 0.9f,
 
             0.5f, -0.5f, -0.5f, 0.8f, 0.2f, 0.9f,
             -0.5f, -0.5f, -0.5f, 0.8f, 0.2f, 0.9f,
 
             0.5f, -0.5f, -0.5f, 0.1f, 0.2f, 0.3f,
             -0.5f, -0.5f, -0.5f, 0.1f, 0.2f, 0.3f,
-            0.5f, -0.5f, 0.0f, 0.1f, 0.2f, 0.3f,
+            0.5f, -0.5f, 0.5f, 0.1f, 0.2f, 0.3f,
 
-            0.5f, -0.5f, 0.0f, 0.1f, 0.2f, 0.3f,
-            -0.5f, -0.5f, 0.0f, 0.1f, 0.2f, 0.3f,
+            0.5f, -0.5f, 0.5f, 0.1f, 0.2f, 0.3f,
+            -0.5f, -0.5f, 0.5f, 0.1f, 0.2f, 0.3f,
             -0.5f, -0.5f, -0.5f, 0.1f, 0.2f, 0.3f,
-
     };
 
 
-    indices = {0, 1, 2,
+    indices = {
+                0, 1, 2,
                0, 3, 4,
                0, 5, 6,
                0, 7, 8,
 
                9, 10, 11,
                12,13,14
-
-
     };
 
     GLuint idx_buffer_handle;
@@ -101,7 +99,8 @@ void SimpleShapeApplication::init() {
 
     glm::mat4 M(1.0f);
     glm::mat4 V = glm::lookAt(eye, center, up);
-    glm::mat4 P = glm::perspective(glm::radians(80.0), 16.0 / 9, 0.1, 200.0);
+    double ratio = (double) this->height / (double) this->width;
+    glm::mat4 P = glm::perspective(glm::radians(80.0), ratio, 0.1, 200.0);
 
     glm::mat4 PVM(P * V * M);
     pvm_buff_handle = GLuint(0u);

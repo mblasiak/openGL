@@ -37,11 +37,11 @@ void SimpleShapeApplication::init() {
     } else { glUniformBlockBinding(program, u_pvm_index, 1); }
 
     std::vector<GLfloat> vertices = {
-            -0.5f, 0.0f, 0.0f,    0.3f, 0.1f, 0.6f,
-            0.5f, 0.0f, 0.0f,     0.3f, 0.1f, 0.6f,
-            0.0f, 0.5f, 0.0f,     0.8f, 0.4f, 0.9f,
-            -0.5f, -0.5f, 0.0f,   0.5f, 0.3f, 0.4f,
-            +0.5f, -.5f, 0.0f,    0.5f, 0.3f, 0.4f,
+            -0.5f, 0.0f, 0.0f, 0.3f, 0.1f, 0.6f,
+            0.5f, 0.0f, 0.0f, 0.3f, 0.1f, 0.6f,
+            0.0f, 0.5f, 0.0f, 0.8f, 0.4f, 0.9f,
+            -0.5f, -0.5f, 0.0f, 0.5f, 0.3f, 0.4f,
+            +0.5f, -.5f, 0.0f, 0.5f, 0.3f, 0.4f,
     };
 
     indices = {0, 3, 4, 0, 4, 1, 0, 1, 2};
@@ -75,7 +75,8 @@ void SimpleShapeApplication::init() {
 
     glm::mat4 M(1.0f);
     glm::mat4 V = glm::lookAt(eye, center, up);
-    glm::mat4 P = glm::perspective(glm::radians(120.0), 0.5, 0.1, 200.0);
+    double ratio = (double) this->height / (double) this->width;
+    glm::mat4 P = glm::perspective(glm::radians(120.0), ratio, 0.1, 200.0);
 
     glm::mat4 PVM(P * V * M);
     pvm_buff_handle = GLuint(0u);

@@ -33,5 +33,7 @@ add_subdirectory(src/Exercises/Indices)
 add_subdirectory(src/Exercises/Uniforms)
 add_subdirectory(src/Exercises/PVM)
 add_subdirectory(src/Exercises/Culling)
+add_subdirectory(src/Exercises/Pyramid)
+
 
 
