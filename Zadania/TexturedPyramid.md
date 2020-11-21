@@ -17,7 +17,7 @@ Po przekopiowaniu/stworzeniu  tych plików proszę wykorzystać klasę `Pyramid`
 
 ## Ładowanie obrazka tekstury 
  
-Jako tekstury użyjemy dostarczonego pliku `multicolor.png`. W katalogu zadania proszę stworzyć podkatalog `Textures` i zapisać tam ten plik. 
+Jako tekstury użyjemy dostarczonego pliku [`multicolor.png`](https://github.com/Dydaktyka/BaseGraphicProject/blob/main/Zadania/multicolor.png). W katalogu zadania proszę stworzyć podkatalog `Textures` i zapisać tam ten plik. 
 
 Teksturę stworzymy w konstruktorze klasy `Pyramid`. Do wczytania obrazka posłuży nam biblioteka `stb_image`. Potrzebne pliki znajdują się w katalogu `src/3rdParty/src/stb`. W celu ich wykorzystania należy dodać w pliku `pyramid.cpp` linijki
 ```
@@ -66,7 +66,7 @@ glBindTexture(GL_TEXTURE_2D, 0);
 
 ## Współrzędne tekstury
 
-Teraz musimy  określić położenie każdej ze ścianek piramidy na teksturze. W tym celu musimy przypisać jej wierzchołkom współrzędne tekstury. Wartości tych współrzędnych znajdują sie w pliku `UV.png`. Proszę zauważyć, że będziemy potrzebowali tylko 8 wierzchołków, a nie 16 jak do tej pory. Współrzędne tekstury wpiszemy zamiast kolorów wierzchołków. To znaczy wartośći R i G będą teraz odpowiadały wartościom U i V, a wartość B należy usunąć. 
+Teraz musimy  określić położenie każdej ze ścianek piramidy na teksturze. W tym celu musimy przypisać jej wierzchołkom współrzędne tekstury. Wartości tych współrzędnych znajdują sie w pliku [`uv.png`](https://github.com/Dydaktyka/BaseGraphicProject/blob/main/Zadania/uv.png). Proszę zauważyć, że będziemy potrzebowali tylko 8 wierzchołków, a nie 16 jak do tej pory. Współrzędne tekstury wpiszemy zamiast kolorów wierzchołków. To znaczy wartośći R i G będą teraz odpowiadały wartościom U i V, a wartość B należy usunąć. 
 
 Proszę zacząć od usunięcia niepotrzebnych wierzchołków i odpowiedniego zmodyfikowania bufora indeksów. Powinno wystarczyć 8 wierzchołków: cztery wierzchołki podstawy i cztery razy powtórzony "czubek" piramidy. Proszę pamiętać o zachowaniu odpowiedniej orientacji. 
 
