@@ -35,6 +35,8 @@ add_subdirectory(src/Exercises/PVM)
 add_subdirectory(src/Exercises/Culling)
 add_subdirectory(src/Exercises/Pyramid)
 add_subdirectory(src/Exercises/Resize)
+add_subdirectory(src/Exercises/Zoom)
+
 
 
 
