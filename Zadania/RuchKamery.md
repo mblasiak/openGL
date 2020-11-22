@@ -139,7 +139,7 @@ Zakładając, że odczytaliśmy już zmianę położenia myszy `dx` i `dy` dokon
 ```
 void rotate_camera(float dx, float dy) {
     camera_->rotate_around_center(-scale_ * dy, camera_->x());
-    camera_->rotate_around_center(-scale_ * dx, glm::vec3{0.0f, 0.0f, 1.0f});
+    camera_->rotate_around_center(-scale_ * dx, camera_->y());
     }
 ```
 `scale_` jest kolejnym polem klasy `CameraControler`  i jest  przelicznikiem pomiędzy pikselami a kątem. Jego
