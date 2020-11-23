@@ -61,7 +61,7 @@ W metodzie `frame` zastępujemy polecenia rysowania piramidy wywołaniem metody 
 Teraz usuwamy cały niepotrzebny kod z  metody `init`. 
 
 
-### Usunięcie konstruktorów kopiujących i operatorówm przypisania.
+### Usunięcie konstruktorów kopiujących i operatorów przypisania.
 
 Tak zdefiniowana klasa ma jednak jeszcze pewną wadę. Nie posiada poprawnej "copy/move semantics". Jak długo będziemy manipulować ją przez wskaźniki to nie będzie problemu. Jednak jeśli skopiujemy ją lub przypiszemy do innej zmienej to mogą pojawić się subtelne błedy. Np. gdybyśmy w  metodzie `init` dodali linijkę:
 ```
