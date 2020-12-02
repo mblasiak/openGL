@@ -170,3 +170,7 @@ Proszę dodać satelitę, czyli kolejną piramidkę tym razem cztery razy mniejs
 
 Proszę tak  ustawić kamerę żeby pokazywała widok "z góry"  znad punktu (0,0,0) obejmujący całą orbitę, tak aby kierunek 'y' był   w kierunku do góry  ekranu. 
 
+Plik PyramidAnimation.mp4 zawiera przykład jak to ma wyglądać. Proszę zwrócić uwagę, że księżyc jest zawsze zwrócony tą sama  ścianką w stronę ziemi.
+
+ 
+
