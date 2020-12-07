@@ -10,7 +10,7 @@ Zaczniemy od stworzenia nowej klasy reprezentującej kwadrat. W tym celu proszę
 
 Następnie proszę dokonać takich zmian w konstruktorze klasy `Quad`, żeby reprezentowała kwadrat o boku o długości 2, leżący w płaszczyźnie poziomej o środku w środku układu współrzędnych. Proszę nadać wierzchołkom takie współrzędne tekstury, żeby teksturą pokryć cały kwadrat. 
 
-Teraz możemy podmienić pole ze wskaźnikiem do piramidki w klasie `SimpleShapeApplication` i podstawić tam kwadrat. Powinniśmy zobaczyć oteksturowany kwadrat na ekranie.  Proszę też podmienić plik z teksturą na plik `silver.png`. 
+Teraz możemy podmienić pole ze wskaźnikiem do piramidki w klasie `SimpleShapeApplication` i podstawić tam kwadrat. Powinniśmy zobaczyć oteksturowany kwadrat na ekranie.  Proszę też podmienić plik z teksturą na plik `silver.png`. Proszę jednak zauważyć, że ten plik zawiera cztery kanały: RGBA. Należy to uwzględnić w poleceniu `glTexImage`.  
 
 
 Przy okazji naprawimy mój błąd z poprzednich zadań :( Po mojej „poprawie” kod w poprzednich zadaniach korzysta z inteligentnych wskaźników do przechowywania wskaźnika na piramidę. Powoduje to, że ich konstruktor jest wywoływany automatycznie kiedy niszczony jest obiekt klasy `SimpleShapeApplication`. Problem w tym, że jak mogą Państwo sprawdzić w pliku `src/Application/application.cpp` dzieje się to już po wywołaniu funkcji `glfwTerminate` w metodzie `run`. A to oznacza, że nie ma już kontekstu OpenGL-a i działanie takich funkcji jak `glDeleteBuffer` czy `glDeleteTextures` jest nieokreślone. 
