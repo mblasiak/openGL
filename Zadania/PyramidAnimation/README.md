@@ -61,7 +61,7 @@ W metodzie `frame` zastępujemy polecenia rysowania piramidy wywołaniem metody 
 Teraz usuwamy cały niepotrzebny kod z  metody `init`. 
 
 
-### Usunięcie konstruktorów kopiujących i operatorówm przypisania.
+### Usunięcie konstruktorów kopiujących i operatorów przypisania.
 
 Tak zdefiniowana klasa ma jednak jeszcze pewną wadę. Nie posiada poprawnej "copy/move semantics". Jak długo będziemy manipulować ją przez wskaźniki to nie będzie problemu. Jednak jeśli skopiujemy ją lub przypiszemy do innej zmienej to mogą pojawić się subtelne błedy. Np. gdybyśmy w  metodzie `init` dodali linijkę:
 ```
@@ -169,4 +169,8 @@ przy czym `S` to macierz przeskalowywująca księżyc o połowę. Potem rysujemy
 Proszę dodać satelitę, czyli kolejną piramidkę tym razem cztery razy mniejszą od oryginalnej, obiegającego Ziemię bo kołowej orbicie o promieniu 1.5 o okresie obiegu 2s. Orbita powinna leżeć w płaszczyźnie x-z (jeśli z to kierunek pionowy).  Oznacza to, że oś obrotu orbitalnego to (0,1,0). Satelita powinien obracać się wokół swojej osi, też (0,1,0) z tym samym okresem.    
 
 Proszę tak  ustawić kamerę żeby pokazywała widok "z góry"  znad punktu (0,0,0) obejmujący całą orbitę, tak aby kierunek 'y' był   w kierunku do góry  ekranu. 
+
+Plik PyramidAnimation.mp4 zawiera przykład jak to ma wyglądać. Proszę zwrócić uwagę, że księżyc jest zawsze zwrócony tą sama  ścianką w stronę ziemi.
+
+ 
 
