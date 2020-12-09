@@ -61,13 +61,13 @@ void SimpleShapeApplication::init() {
 
 
     indices = {
-                0, 1, 2,
-               0, 3, 4,
-               0, 5, 6,
-               0, 7, 8,
+            0, 1, 2,
+            0, 3, 4,
+            0, 5, 6,
+            0, 7, 8,
 
-               9, 10, 11,
-               12,13,14
+            9, 10, 11,
+            12, 13, 14
     };
 
     GLuint idx_buffer_handle;
@@ -94,12 +94,12 @@ void SimpleShapeApplication::init() {
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
     glm::vec3 up = {0.0, 1.0, 0.0};
-    glm::vec3 eye = {+0.3, +0.7, -.9};
+    glm::vec3 eye = {+0.5, +0.0, -.99};
     glm::vec3 center = {0.0, -0.2, 0.0};
 
     glm::mat4 M(1.0f);
     glm::mat4 V = glm::lookAt(eye, center, up);
-    double ratio = (double) this->height / (double) this->width;
+    double ratio = (double) this->width / (double) this->height;
     glm::mat4 P = glm::perspective(glm::radians(80.0), ratio, 0.1, 200.0);
 
     glm::mat4 PVM(P * V * M);

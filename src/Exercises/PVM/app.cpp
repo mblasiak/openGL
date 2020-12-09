@@ -75,7 +75,7 @@ void SimpleShapeApplication::init() {
 
     glm::mat4 M(1.0f);
     glm::mat4 V = glm::lookAt(eye, center, up);
-    double ratio = (double) this->height / (double) this->width;
+    double ratio = (double) this->width / (double) this->height;
     glm::mat4 P = glm::perspective(glm::radians(120.0), ratio, 0.1, 200.0);
 
     glm::mat4 PVM(P * V * M);

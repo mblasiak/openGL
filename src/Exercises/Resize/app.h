@@ -37,7 +37,7 @@ private:
     GLuint pvm_buff_handle;
 
     glm::vec3 up = {0.0, 1.0, 0.0};
-    glm::vec3 eye = {+0.3, +0.7, -.9};
+    glm::vec3 eye = {+0.0, +0.0, -.99};
     glm::vec3 center = {0.0, -0.2, 0.0};
 
     float fov = glm::radians(80.0);

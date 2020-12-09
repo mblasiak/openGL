@@ -4,7 +4,7 @@
 
 int main() {
 
-    SimpleShapeApplication app(650, 480, PROJECT_NAME,4,1);
+    SimpleShapeApplication app(750, 100, PROJECT_NAME,4,1);
 
 
     app.run(1);

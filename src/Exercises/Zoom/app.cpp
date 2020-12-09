@@ -96,7 +96,7 @@ void SimpleShapeApplication::init() {
     std::tie(width, height) = frame_buffer_size();
     camera_->look_at(eye, center, up);
     camera_->perspective(fov, (float) height / (float) width, near, far);
-    camera_->set_aspect((float) height / (float) width);
+    camera_->set_aspect((float) width / (float) height );
     PVM = glm::mat4(camera_->projection() * camera_->view() * M);
 
     pvm_buff_handle = GLuint(0u);
@@ -154,6 +154,7 @@ void SimpleShapeApplication::framebuffer_resize_callback(int w, int h) {
     glViewport(0, 0, w, h);
     camera_->set_aspect((float) w / (float) h);
     camera_->look_at(eye, center, up);
+    PVM = glm::mat4(camera_->projection() * camera_->view() * M);
 }
 
 void SimpleShapeApplication::scroll_callback(double xoffset, double yoffset) {

@@ -95,7 +95,7 @@ void SimpleShapeApplication::init() {
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
     std::tie(width, height) = frame_buffer_size();
-    ratio = (float) height / (float) width;
+    ratio = (float) width / (float) height;
     P = glm::perspective(fov, ratio, near, far);
 
     PVM = glm::mat4(P * V * M);
@@ -154,4 +154,5 @@ void SimpleShapeApplication::framebuffer_resize_callback(int w, int h) {
     glViewport(0, 0, w, h);
     ratio = (float) w / (float) h;
     P = glm::perspective(fov, ratio, near, far);
+    PVM = glm::mat4(P * V * M);
 }
