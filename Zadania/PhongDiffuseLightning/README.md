@@ -215,7 +215,7 @@ vFragColor.rgb = diffuse_color.rgb*light.ambient.rgb;
 ```
 a potem resztę swiatła dodajemy  do niego
 ```glsl
- vFragColor.rgb += light_in * (diffuse_color.rgb + specular_color*spec_intensity)*light.color;
+ vFragColor.rgb += light_in * diffuse_color.rgb * light.color;
 ```
 W pliku `diffuse_att_amb_100.png` jest przykładowy wynik działaia programu dla światła umieszczonego w odległości   1 od  kwadratu, wektora `a={1.0, 0.0, 1.0, 0.0}` i światła "ambient"  o kolorze `{0.2, 0.2, 0.2}`. 
 
