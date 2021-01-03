@@ -316,7 +316,7 @@ xe::utils::set_uniform1i(program,"shininess_map",2);
 a w metodzie `frame` dodać:
 ```c++
 if(material->Ks_map>0) {
-    glActiveTexture(GL_TEXTURE0);
+    glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, material->Ks_map);
 }
 if(material->Ns_map>0) {
