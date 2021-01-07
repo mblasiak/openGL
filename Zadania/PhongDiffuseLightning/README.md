@@ -163,7 +163,7 @@ vFragColor.a = diffuse_color.a;
 vFragColor.rgb = light_in * diffuse_color.rgb*light.color;
 ```
 
-Powinni Państwo zobaczyć plamę światła na środku kwadratu. Dobrym testem jest przybliżanie i oddalanie światła od powierzchni kwadratu. Paradoksalnie przy oddalaniu kwadrat będzie się on stawał coraz jaśniejszy. Spowodowane jest to faktem, że na razie nie zaimplementowaliśmy osłabiania światła z odległością, natomiast oddalanie źródła światła powoduje, że pada ono pod mniejszym kątem na powierzchnię. W  załączonych plikach `diffuse_dist.png`  pokazane są przykłady jak ma to wyglądąc. Swiatło ustawione jest w odlegści `dist/100` od kwadratu nad jego środkiem. 
+Powinni Państwo zobaczyć plamę światła na środku kwadratu. Dobrym testem jest przybliżanie i oddalanie światła od powierzchni kwadratu. Paradoksalnie przy oddalaniu kwadrat będzie się on stawał coraz jaśniejszy. Spowodowane jest to faktem, że na razie nie zaimplementowaliśmy osłabiania światła z odległością, natomiast oddalanie źródła światła powoduje, że pada ono pod mniejszym kątem na powierzchnię. W  załączonych plikach `diffuse_dist.png`  pokazane są przykłady jak ma to wyglądać. Za `dist` należy podstwić odlgłość światła od quada: światło ustawione jest w odlegści `dist/100` od kwadratu nad jego środkiem. 
 
 ### Osłabienie światła
 
