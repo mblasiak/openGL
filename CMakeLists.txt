@@ -37,6 +37,7 @@ add_subdirectory(src/Exercises/Pyramid)
 add_subdirectory(src/Exercises/Resize)
 add_subdirectory(src/Exercises/Zoom)
 add_subdirectory(src/Exercises/CameraMove)
+add_subdirectory(src/Exercises/PyramidAnimation)
 
 
 
