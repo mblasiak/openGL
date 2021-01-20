@@ -20,6 +20,14 @@ public:
 
     void draw();
 
+    Pyramid(const Pyramid &rhs) = delete;
+
+    Pyramid(Pyramid &&rhs) = delete;
+
+    Pyramid &operator=(const Pyramid &rhs) = delete;
+
+    void operator=(Pyramid &&rhs) = delete;
+
 private:
     std::vector<GLfloat> vertices = {
             0.0f, 0.5f, 0.0f, 0.3f, 0.1f, 0.6f,

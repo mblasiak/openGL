@@ -49,7 +49,7 @@ void SimpleShapeApplication::init() {
     glBindBufferBase(GL_UNIFORM_BUFFER, 1, pvm_buff_handle);
 //-----------------------------------------------------------------------
 
-    pyramid = new Pyramid();
+    pyramid_ = std::make_shared<Pyramid>();
 
 
 //    Clear bindings
@@ -74,13 +74,31 @@ void SimpleShapeApplication::init() {
     glEnable(GL_CULL_FACE);
     glFrontFace(GL_CCW);
     glCullFace(GL_BACK);
+//    Time
+    start_ = std::chrono::steady_clock::now();
+    auto rotation_angle = 4.0;
+
 }
 
 void SimpleShapeApplication::frame() {
-    pyramid->draw();
+
+    auto now = std::chrono::steady_clock::now();
+    auto elapsed_time = std::chrono::duration_cast<std::chrono::duration<float>>(now - start_).count();
+    auto rotation_angle = 2.0f * glm::pi<float>() * elapsed_time / rotation_period;
+    auto rotation_m = glm::rotate(glm::mat4(1.0f), rotation_angle, {0.0, 0.0, 1.0});
+
+//    draw objects
+//-----------------------------------------------------------------------
+
+    pyramid_->draw();
+//    Calculate camera changes
+//-----------------------------------------------------------------------
     glBindBuffer(GL_UNIFORM_BUFFER, pvm_buff_handle);
     PVM = glm::mat4(camera_->projection() * camera_->view() * M);
+//    PVM = glm::mat4(camera_->projection() * camera_->view() * M * rotation_m);
     glBufferSubData(GL_UNIFORM_BUFFER, 0, 16 * sizeof(float), &PVM[0]);
+//    Clear
+//-----------------------------------------------------------------------
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
     glBindVertexArray(0);
 }

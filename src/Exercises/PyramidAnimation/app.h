@@ -10,6 +10,8 @@
 #include <glm/mat4x4.hpp>
 #include <glm/glm.hpp>
 #include <glm/ext/matrix_transform.hpp>
+#include <memory>
+#include <chrono>
 #include "Application/application.h"
 #include "Application/utils.h"
 
@@ -63,8 +65,13 @@ private:
     glm::mat4 M = glm::mat4(1.0f);
     glm::mat4 PVM;
 
-    Pyramid *pyramid;
     Camera *camera_;
     CameraController *controller_;
+//    Pyramids
+    std::shared_ptr<Pyramid> pyramid_;
+// Animation
+    std::chrono::steady_clock::time_point start_;
+    float rotation_period = 4.0;
+
 
 };
