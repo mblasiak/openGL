@@ -55,8 +55,8 @@ private:
     GLuint pvm_buff_handle;
 
     glm::vec3 up = {0.0, 1.0, 0.0};
-    glm::vec3 eye = {+0.3, +0.7, -.9};
-    glm::vec3 center = {0.0, -0.2, 0.0};
+    glm::vec3 eye = {+0.0, +4.0, -5.0};
+    glm::vec3 center = {0.0, -0.0, -0.0};
 
     float fov = glm::radians(80.0);
     float near = 0.1;
@@ -72,6 +72,11 @@ private:
 // Animation
     std::chrono::steady_clock::time_point start_;
     float rotation_period = 4.0;
-
+    const double ellipse_a = 3;
+    const double ellipse_b = 2;
+    const double orbital_rotation_period = 20.0f;
+    double orbital_rotation_angle;
+    double orbital_pos_x;
+    double orbital_pos_z;
 
 };

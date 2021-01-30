@@ -85,7 +85,13 @@ void SimpleShapeApplication::frame() {
     auto now = std::chrono::steady_clock::now();
     auto elapsed_time = std::chrono::duration_cast<std::chrono::duration<float>>(now - start_).count();
     auto rotation_angle = 2.0f * glm::pi<float>() * elapsed_time / rotation_period;
-    auto rotation_m = glm::rotate(glm::mat4(1.0f), rotation_angle, {0.0, 0.0, 1.0});
+    auto rotation_m = glm::rotate(glm::mat4(1.0f), rotation_angle, {0.0, 1.00, 0.0});
+
+    orbital_rotation_angle = 2.0f * glm::pi<float>() * elapsed_time / orbital_rotation_period;
+    orbital_pos_x = ellipse_a * cos(orbital_rotation_angle);
+    orbital_pos_z = ellipse_b * sin(orbital_rotation_angle);
+    auto O = glm::translate(glm::mat4(1.0f), glm::vec3{orbital_pos_x, 0.0, orbital_pos_z});
+    auto transform_move_m = O * rotation_m;
 
 //    draw objects
 //-----------------------------------------------------------------------
@@ -94,8 +100,8 @@ void SimpleShapeApplication::frame() {
 //    Calculate camera changes
 //-----------------------------------------------------------------------
     glBindBuffer(GL_UNIFORM_BUFFER, pvm_buff_handle);
-    PVM = glm::mat4(camera_->projection() * camera_->view() * M);
-//    PVM = glm::mat4(camera_->projection() * camera_->view() * M * rotation_m);
+//    PVM = glm::mat4(camera_->projection() * camera_->view() * M);
+    PVM = glm::mat4(camera_->projection() * camera_->view() * M * transform_move_m);
     glBufferSubData(GL_UNIFORM_BUFFER, 0, 16 * sizeof(float), &PVM[0]);
 //    Clear
 //-----------------------------------------------------------------------
