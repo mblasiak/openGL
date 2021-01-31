@@ -73,18 +73,29 @@ private:
     // Animation
     std::chrono::steady_clock::time_point start_;
 //    Planet
-    float rotation_period = 4.0;
-    const double ellipse_a = 6;
-    const double ellipse_b = 4;
+    const float rotation_period = 4.0;
     const double orbital_rotation_period = 20.0f;
+    const double ellipse_a = 10;
+    const double ellipse_b = 8;
     double orbital_rotation_angle;
     double orbital_pos_x;
     double orbital_pos_z;
 //    Moon
-    float moon_rotation_period = 2.0;
+    const float moon_rotation_period = 10.0f;
+    const double moon_orbital_rotation_period = moon_rotation_period;
     double moon_orbital_rotation_angle;
     double moon_orbital_pos_x;
     double moon_orbital_pos_z;
     double moon_ellipse_r = 3.0f;
+    double moon_scale = 2.0f;
+
+    //    Satellite
+    const float satellite_rotation_period = 10.0f;
+    const double satellite_orbital_rotation_period = satellite_rotation_period;
+    double satellite_orbital_rotation_angle;
+    double satellite_orbital_pos_x;
+    double satellite_orbital_pos_z;
+    double satellite_ellipse_r = 2.0f;
+    double satellite_scale = 4.0f;
 
 };

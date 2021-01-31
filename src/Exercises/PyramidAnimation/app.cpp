@@ -104,16 +104,31 @@ void SimpleShapeApplication::frame() {
     pyramid_->draw();
 //Moon
     auto moon_rotation_angle = 2.0f * glm::pi<float>() * elapsed_time / moon_rotation_period;
-    auto moon_rotation_m = glm::rotate(glm::mat4(1.0f), moon_rotation_angle, {0.0, 1.00, 0.0});
-    moon_orbital_rotation_angle = 2.0f * glm::pi<float>() * elapsed_time / moon_rotation_angle;
+    auto moon_rotation_m = glm::rotate(glm::mat4(1.0f), -moon_rotation_angle, {0.0, 1.00, 0.0});
+    moon_orbital_rotation_angle = 2.0f * glm::pi<float>() * elapsed_time / moon_orbital_rotation_period;
     moon_orbital_pos_x = moon_ellipse_r * cos(moon_orbital_rotation_angle);
-    moon_orbital_pos_x = moon_ellipse_r * sin(moon_orbital_rotation_angle);
+    moon_orbital_pos_z = moon_ellipse_r * sin(moon_orbital_rotation_angle);
     auto moon_tranlation_m = glm::translate(glm::mat4(1.0f), glm::vec3{moon_orbital_pos_x, 0.0, moon_orbital_pos_z});
-    auto moon_scale = glm::mat4(.3f);
-    moon_scale[3][3] = 1.0;
-    auto moon_m = moon_tranlation_m * moon_rotation_m;
+    auto moon_scale_m = glm::mat4(1.0f);
+    moon_scale_m[3][3] = moon_scale;
+    auto moon_m = translation_m * moon_tranlation_m * moon_rotation_m;
 
-    PVM = glm::mat4(camera_->projection() * camera_->view() * M * planet_m * moon_m * moon_scale);
+    PVM = glm::mat4(camera_->projection() * camera_->view() * M * moon_m * moon_scale_m);
+    glBufferSubData(GL_UNIFORM_BUFFER, 0, 16 * sizeof(float), &PVM[0]);
+    pyramid_->draw();
+//Satellite
+    auto satellite_rotation_angle = 2.0f * glm::pi<float>() * elapsed_time / satellite_rotation_period;
+    auto satellite_rotation_m = glm::rotate(glm::mat4(1.0f), satellite_rotation_angle, {1.0, 0.0, 0.0});
+    satellite_orbital_rotation_angle = 2.0f * glm::pi<float>() * elapsed_time / satellite_orbital_rotation_period;
+    satellite_orbital_pos_x = satellite_ellipse_r * cos(satellite_orbital_rotation_angle);
+    satellite_orbital_pos_z = satellite_ellipse_r * sin(satellite_orbital_rotation_angle);
+    auto satellite_tranlation_m = glm::translate(glm::mat4(1.0f),
+                                                 glm::vec3{satellite_orbital_pos_x, satellite_orbital_pos_z, 0.0});
+    auto satellite_scale_m = glm::mat4(1.0f);
+    satellite_scale_m[3][3] = satellite_scale;
+    auto satellite_m = translation_m * satellite_tranlation_m * satellite_rotation_m;
+
+    PVM = glm::mat4(camera_->projection() * camera_->view() * M * satellite_m * satellite_scale_m);
     glBufferSubData(GL_UNIFORM_BUFFER, 0, 16 * sizeof(float), &PVM[0]);
     pyramid_->draw();
 
