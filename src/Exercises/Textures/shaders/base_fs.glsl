@@ -1,10 +1,10 @@
 #version 410
 
 layout(location=0) out vec4 vFragColor;
-in vec3 vertex_color;
+in vec2 texture_cords;
 
 void main() {
-    vFragColor.rgb = vertex_color;
+    vFragColor.rg = texture_cords;
 }
 
 
