@@ -52,4 +52,7 @@ Pyramid::~Pyramid() {
 void Pyramid::draw() {
     glBindVertexArray(vao_);
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_SHORT, reinterpret_cast<GLvoid *>(0));
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D,diffuse_texture_);
+
 }

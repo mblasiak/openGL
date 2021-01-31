@@ -60,7 +60,13 @@ void SimpleShapeApplication::init() {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 //-----------------------------------------------------------------------
-
+//TEXTURES
+    auto  u_diffuse_map_location = glGetUniformLocation(program,"diffuse_map");
+    if(u_diffuse_map_location==-1) {
+        std::cerr<<"Cannot find uniform diffuse_map\\n";
+    } else {
+        glUniform1ui(u_diffuse_map_location,0);
+    }
 
 
 // Setup window + rendering options
