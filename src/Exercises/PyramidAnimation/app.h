@@ -55,7 +55,7 @@ private:
     GLuint pvm_buff_handle;
 
     glm::vec3 up = {0.0, 1.0, 0.0};
-    glm::vec3 eye = {+0.0, +4.0, -5.0};
+    glm::vec3 eye = {+0.0, +8.0, -10.0};
     glm::vec3 center = {0.0, -0.0, -0.0};
 
     float fov = glm::radians(80.0);
@@ -69,14 +69,22 @@ private:
     CameraController *controller_;
 //    Pyramids
     std::shared_ptr<Pyramid> pyramid_;
-// Animation
+
+    // Animation
     std::chrono::steady_clock::time_point start_;
+//    Planet
     float rotation_period = 4.0;
-    const double ellipse_a = 3;
-    const double ellipse_b = 2;
+    const double ellipse_a = 6;
+    const double ellipse_b = 4;
     const double orbital_rotation_period = 20.0f;
     double orbital_rotation_angle;
     double orbital_pos_x;
     double orbital_pos_z;
+//    Moon
+    float moon_rotation_period = 2.0;
+    double moon_orbital_rotation_angle;
+    double moon_orbital_pos_x;
+    double moon_orbital_pos_z;
+    double moon_ellipse_r = 3.0f;
 
 };

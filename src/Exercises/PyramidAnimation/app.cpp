@@ -51,7 +51,6 @@ void SimpleShapeApplication::init() {
 
     pyramid_ = std::make_shared<Pyramid>();
 
-
 //    Clear bindings
 //-----------------------------------------------------------------------
     glBindVertexArray(0);
@@ -84,25 +83,41 @@ void SimpleShapeApplication::frame() {
 
     auto now = std::chrono::steady_clock::now();
     auto elapsed_time = std::chrono::duration_cast<std::chrono::duration<float>>(now - start_).count();
+
     auto rotation_angle = 2.0f * glm::pi<float>() * elapsed_time / rotation_period;
     auto rotation_m = glm::rotate(glm::mat4(1.0f), rotation_angle, {0.0, 1.00, 0.0});
-
     orbital_rotation_angle = 2.0f * glm::pi<float>() * elapsed_time / orbital_rotation_period;
     orbital_pos_x = ellipse_a * cos(orbital_rotation_angle);
     orbital_pos_z = ellipse_b * sin(orbital_rotation_angle);
-    auto O = glm::translate(glm::mat4(1.0f), glm::vec3{orbital_pos_x, 0.0, orbital_pos_z});
-    auto transform_move_m = O * rotation_m;
+    auto translation_m = glm::translate(glm::mat4(1.0f), glm::vec3{orbital_pos_x, 0.0, orbital_pos_z});
+    auto planet_m = translation_m * rotation_m;
 
-//    draw objects
 //-----------------------------------------------------------------------
-
-    pyramid_->draw();
-//    Calculate camera changes
-//-----------------------------------------------------------------------
+//Planet
     glBindBuffer(GL_UNIFORM_BUFFER, pvm_buff_handle);
-//    PVM = glm::mat4(camera_->projection() * camera_->view() * M);
-    PVM = glm::mat4(camera_->projection() * camera_->view() * M * transform_move_m);
+    PVM = glm::mat4(camera_->projection() * camera_->view() * M * planet_m);
     glBufferSubData(GL_UNIFORM_BUFFER, 0, 16 * sizeof(float), &PVM[0]);
+    pyramid_->draw();
+//Center
+    PVM = glm::mat4(camera_->projection() * camera_->view() * M);
+    glBufferSubData(GL_UNIFORM_BUFFER, 0, 16 * sizeof(float), &PVM[0]);
+    pyramid_->draw();
+//Moon
+    auto moon_rotation_angle = 2.0f * glm::pi<float>() * elapsed_time / moon_rotation_period;
+    auto moon_rotation_m = glm::rotate(glm::mat4(1.0f), moon_rotation_angle, {0.0, 1.00, 0.0});
+    moon_orbital_rotation_angle = 2.0f * glm::pi<float>() * elapsed_time / moon_rotation_angle;
+    moon_orbital_pos_x = moon_ellipse_r * cos(moon_orbital_rotation_angle);
+    moon_orbital_pos_x = moon_ellipse_r * sin(moon_orbital_rotation_angle);
+    auto moon_tranlation_m = glm::translate(glm::mat4(1.0f), glm::vec3{moon_orbital_pos_x, 0.0, moon_orbital_pos_z});
+    auto moon_scale = glm::mat4(.3f);
+    moon_scale[3][3] = 1.0;
+    auto moon_m = moon_tranlation_m * moon_rotation_m;
+
+    PVM = glm::mat4(camera_->projection() * camera_->view() * M * planet_m * moon_m * moon_scale);
+    glBufferSubData(GL_UNIFORM_BUFFER, 0, 16 * sizeof(float), &PVM[0]);
+    pyramid_->draw();
+
+
 //    Clear
 //-----------------------------------------------------------------------
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
