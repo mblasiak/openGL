@@ -24,7 +24,7 @@ Pyramid::Pyramid() {
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), reinterpret_cast<GLvoid *>(0));
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat),
-                          reinterpret_cast<GLvoid *>(2 * sizeof(GLfloat)));
+                          reinterpret_cast<GLvoid *>(3 * sizeof(GLfloat)));
 
 //    Texture
     int width, height, n_channels;
