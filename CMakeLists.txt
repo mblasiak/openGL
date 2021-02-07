@@ -39,7 +39,4 @@ add_subdirectory(src/Exercises/Zoom)
 add_subdirectory(src/Exercises/CameraMove)
 add_subdirectory(src/Exercises/PyramidAnimation)
 add_subdirectory(src/Exercises/Textures)
-
-
-
-
+add_subdirectory(src/Exercises/Phong)
