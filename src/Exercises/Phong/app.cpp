@@ -26,12 +26,24 @@ void SimpleShapeApplication::init() {
         std::cerr << "Cannot create program from " << std::string(PROJECT_DIR) + "/shaders/base_vs.glsl" << " and ";
         std::cerr << std::string(PROJECT_DIR) + "/shaders/base_fs.glsl" << " shader files" << std::endl;
     }
-
+    auto u_diffuse_map_location = glGetUniformLocation(program, "diffuse_map");
+    if (u_diffuse_map_location == -1) {
+        std::cerr << "Cannot find uniform diffuse_map\n";
+    } else {
+        glUniform1ui(u_diffuse_map_location, 0);
+    }
 //    Setup PVM uniform
     auto u_pvm_index = glGetUniformBlockIndex(program, "Transformations");
     if (u_pvm_index == GL_INVALID_INDEX) {
         std::cout << "Cannot find PVM uniform block in program" << std::endl;
     } else { glUniformBlockBinding(program, u_pvm_index, 1); }
+
+    auto u_light_index = glGetUniformBlockIndex(program, "Light");
+    if (u_light_index == GL_INVALID_INDEX) {
+        std::cout << "Cannot find Light uniform block in program" << std::endl;
+    } else { glUniformBlockBinding(program, u_light_index, 2); }
+
+
 
 //  PVM + CAMERA Setup
 //-----------------------------------------------------------------------
@@ -51,8 +63,23 @@ void SimpleShapeApplication::init() {
     glBindBufferBase(GL_UNIFORM_BUFFER, 1, pvm_buff_handle);
 //-----------------------------------------------------------------------
 
-    quad = std::make_shared<Quad>();
 
+
+    quad = std::make_shared<Quad>();
+//Light
+    glGenBuffers(1, &light_buff_handle);
+    glBindBuffer(GL_UNIFORM_BUFFER, light_buff_handle);
+    glBufferData(GL_UNIFORM_BUFFER, 3 * 4 * sizeof(float), nullptr, GL_STATIC_DRAW);
+    glBindBuffer(GL_UNIFORM_BUFFER, 0);
+    glBindBufferBase(GL_UNIFORM_BUFFER, 2, light_buff_handle);
+    light.color = glm::vec4(0.6f, 0.8f, 0.1f, 1.0f);
+    light.position = glm::vec4(0.0f, 0.5f, 0.0f, 1.0f);
+
+    glBindBuffer(GL_UNIFORM_BUFFER, light_buff_handle);
+    auto light_pos = VM * light.position;
+    glBufferSubData(GL_UNIFORM_BUFFER, 0, 4 * sizeof(glm::vec3), &light_pos[0]);
+    glBufferSubData(GL_UNIFORM_BUFFER, 4 * sizeof(glm::vec3), 4 * sizeof(float), &light.color[0]);
+    glBufferSubData(GL_UNIFORM_BUFFER, 2 * 4 * sizeof(glm::vec3), 4 * sizeof(float), &light.a[0]);
 
 //    Clear bindings
 //-----------------------------------------------------------------------
@@ -62,12 +89,9 @@ void SimpleShapeApplication::init() {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 //-----------------------------------------------------------------------
 //TEXTURES
-    auto u_diffuse_map_location = glGetUniformLocation(program, "diffuse_map");
-    if (u_diffuse_map_location == -1) {
-        std::cerr << "Cannot find uniform diffuse_map\\n";
-    } else {
-        glUniform1ui(u_diffuse_map_location, 0);
-    }
+
+
+
 
 
 // Setup window + rendering options
@@ -96,7 +120,21 @@ void SimpleShapeApplication::frame() {
     VM = glm::mat4(camera_->view() * M);
 //    PVM = glm::mat4(camera_->projection() * camera_->view() * M * rotation_m);
     glBufferSubData(GL_UNIFORM_BUFFER, 0, 16 * sizeof(float), &P[0]);
-    glBufferSubData(GL_UNIFORM_BUFFER, 16*sizeof(float), 16 * sizeof(float), &VM[0]);
+    glBufferSubData(GL_UNIFORM_BUFFER, 16 * sizeof(float), 16 * sizeof(float), &VM[0]);
+    auto R = glm::mat3(VM);
+    auto N = glm::transpose(glm::inverse(R));
+    glBufferSubData(GL_UNIFORM_BUFFER, 32 * sizeof(float), 3 * sizeof(float), &N[0]);
+    glBufferSubData(GL_UNIFORM_BUFFER, 36 * sizeof(float), 3 * sizeof(float), &N[1]);
+    glBufferSubData(GL_UNIFORM_BUFFER, 40 * sizeof(float), 3 * sizeof(float), &N[2]);
+
+
+    glBindBuffer(GL_UNIFORM_BUFFER, light_buff_handle);
+    auto light_pos = VM * light.position;
+    glBufferSubData(GL_UNIFORM_BUFFER, 0, 4 * sizeof(float), &light_pos[0]);
+    glBufferSubData(GL_UNIFORM_BUFFER, 4 * sizeof(float), 4 * sizeof(float), &light.color[0]);
+    glBufferSubData(GL_UNIFORM_BUFFER, 2 * 4 * sizeof(float), 4 * sizeof(float), &light.a[0]);
+
+
 
 //    Clear
 //-----------------------------------------------------------------------

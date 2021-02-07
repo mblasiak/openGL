@@ -27,8 +27,8 @@ Quad::Quad() {
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat),
                           reinterpret_cast<GLvoid *>(3 * sizeof(GLfloat)));
     glEnableVertexAttribArray(2);
-    glVertexAttribPointer(1, 5, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat),
-                          reinterpret_cast<GLvoid *>(3 * sizeof(GLfloat)));
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat),
+                          reinterpret_cast<GLvoid *>(5 * sizeof(GLfloat)));
 
 //    Texture
     int width, height, n_channels;

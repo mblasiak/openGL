@@ -56,6 +56,7 @@ private:
     int width;
     int height;
     GLuint pvm_buff_handle;
+    GLuint light_buff_handle;
 
     glm::vec3 up = {0.0, 1.0, 0.0};
     glm::vec3 eye = {+0.3, +0.7, -5.5};
@@ -74,4 +75,12 @@ private:
     CameraController *controller_;
 //    Pyramids
     std::shared_ptr<Quad> quad;
+
+    struct Light {
+        glm::vec4 position;
+        glm::vec4 color;
+        glm::vec4 a;
+    };
+
+    Light light;
 };
