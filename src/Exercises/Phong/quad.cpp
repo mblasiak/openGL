@@ -22,9 +22,12 @@ Quad::Quad() {
     glBindBuffer(GL_ARRAY_BUFFER, buffer_[1]);
 
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), reinterpret_cast<GLvoid *>(0));
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), reinterpret_cast<GLvoid *>(0));
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat),
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat),
+                          reinterpret_cast<GLvoid *>(3 * sizeof(GLfloat)));
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(1, 5, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat),
                           reinterpret_cast<GLvoid *>(3 * sizeof(GLfloat)));
 
 //    Texture

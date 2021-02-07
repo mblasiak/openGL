@@ -2,6 +2,7 @@
 // Created by pbialas on 25.09.2020.
 //
 #define STB_IMAGE_IMPLEMENTATION
+
 #include "3rdParty/src/stb/stb_image.h"
 #include "app.h"
 
@@ -27,7 +28,7 @@ void SimpleShapeApplication::init() {
     }
 
 //    Setup PVM uniform
-    auto u_pvm_index = glGetUniformBlockIndex(program, "PVM");
+    auto u_pvm_index = glGetUniformBlockIndex(program, "Transformations");
     if (u_pvm_index == GL_INVALID_INDEX) {
         std::cout << "Cannot find PVM uniform block in program" << std::endl;
     } else { glUniformBlockBinding(program, u_pvm_index, 1); }
@@ -40,12 +41,12 @@ void SimpleShapeApplication::init() {
     camera_->look_at(eye, center, up);
     camera_->perspective(fov, (float) height / (float) width, near, far);
     camera_->set_aspect((float) width / (float) height);
-    PVM = glm::mat4(camera_->projection() * camera_->view() * M);
-
+    P = glm::mat4(camera_->projection());
+    VM = glm::mat4(camera_->view() * M);
     pvm_buff_handle = GLuint(0u);
     glGenBuffers(1, &pvm_buff_handle);
     glBindBuffer(GL_UNIFORM_BUFFER, pvm_buff_handle);
-    glBufferData(GL_UNIFORM_BUFFER, 16 * sizeof(float), nullptr, GL_STATIC_DRAW);
+    glBufferData(GL_UNIFORM_BUFFER, (2 * 16 + 3 * 4) * sizeof(float), nullptr, GL_STATIC_DRAW);
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
     glBindBufferBase(GL_UNIFORM_BUFFER, 1, pvm_buff_handle);
 //-----------------------------------------------------------------------
@@ -61,11 +62,11 @@ void SimpleShapeApplication::init() {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 //-----------------------------------------------------------------------
 //TEXTURES
-    auto  u_diffuse_map_location = glGetUniformLocation(program,"diffuse_map");
-    if(u_diffuse_map_location==-1) {
-        std::cerr<<"Cannot find uniform diffuse_map\\n";
+    auto u_diffuse_map_location = glGetUniformLocation(program, "diffuse_map");
+    if (u_diffuse_map_location == -1) {
+        std::cerr << "Cannot find uniform diffuse_map\\n";
     } else {
-        glUniform1ui(u_diffuse_map_location,0);
+        glUniform1ui(u_diffuse_map_location, 0);
     }
 
 
@@ -91,9 +92,12 @@ void SimpleShapeApplication::frame() {
 //    Calculate camera changes
 //-----------------------------------------------------------------------
     glBindBuffer(GL_UNIFORM_BUFFER, pvm_buff_handle);
-    PVM = glm::mat4(camera_->projection() * camera_->view() * M);
+    P = glm::mat4(camera_->projection());
+    VM = glm::mat4(camera_->view() * M);
 //    PVM = glm::mat4(camera_->projection() * camera_->view() * M * rotation_m);
-    glBufferSubData(GL_UNIFORM_BUFFER, 0, 16 * sizeof(float), &PVM[0]);
+    glBufferSubData(GL_UNIFORM_BUFFER, 0, 16 * sizeof(float), &P[0]);
+    glBufferSubData(GL_UNIFORM_BUFFER, 16*sizeof(float), 16 * sizeof(float), &VM[0]);
+
 //    Clear
 //-----------------------------------------------------------------------
     glBindBuffer(GL_UNIFORM_BUFFER, 0);

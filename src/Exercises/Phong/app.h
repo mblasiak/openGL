@@ -66,7 +66,9 @@ private:
     float far = 200.0;
 
     glm::mat4 M = glm::mat4(1.0f);
-    glm::mat4 PVM;
+    glm::mat4 P;
+    glm::mat4 VM;
+
 
     Camera *camera_;
     CameraController *controller_;
