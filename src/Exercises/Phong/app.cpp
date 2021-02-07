@@ -74,6 +74,8 @@ void SimpleShapeApplication::init() {
     glBindBufferBase(GL_UNIFORM_BUFFER, 2, light_buff_handle);
     light.color = glm::vec4(0.6f, 0.8f, 0.1f, 1.0f);
     light.position = glm::vec4(0.0f, 0.5f, 0.0f, 1.0f);
+    light.a = glm::vec4(1.0f, 0.0f, 1.0f, 0.0f);
+
 
     glBindBuffer(GL_UNIFORM_BUFFER, light_buff_handle);
     auto light_pos = VM * light.position;
