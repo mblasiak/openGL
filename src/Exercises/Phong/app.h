@@ -19,6 +19,7 @@
 #include "camera.h"
 #include "camera_controller.h"
 #include "pyramid.h"
+#include "quad.h"
 
 class SimpleShapeApplication : public xe::Application {
 public:
@@ -45,6 +46,8 @@ public:
 
     void set_controller(CameraController *controller) { controller_ = controller; }
 
+    void cleanup() override;
+
     ~SimpleShapeApplication() {
         delete camera_;
     }
@@ -55,7 +58,7 @@ private:
     GLuint pvm_buff_handle;
 
     glm::vec3 up = {0.0, 1.0, 0.0};
-    glm::vec3 eye = {+0.3, +0.7, -.9};
+    glm::vec3 eye = {+0.3, +0.7, -5.5};
     glm::vec3 center = {0.0, -0.2, 0.0};
 
     float fov = glm::radians(80.0);
@@ -68,5 +71,5 @@ private:
     Camera *camera_;
     CameraController *controller_;
 //    Pyramids
-    std::shared_ptr<Pyramid> pyramid_;
+    std::shared_ptr<Quad> quad;
 };

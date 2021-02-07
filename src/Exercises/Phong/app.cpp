@@ -50,7 +50,7 @@ void SimpleShapeApplication::init() {
     glBindBufferBase(GL_UNIFORM_BUFFER, 1, pvm_buff_handle);
 //-----------------------------------------------------------------------
 
-    pyramid_ = std::make_shared<Pyramid>();
+    quad = std::make_shared<Quad>();
 
 
 //    Clear bindings
@@ -78,16 +78,16 @@ void SimpleShapeApplication::init() {
 
     glEnable(GL_DEPTH_TEST);
     glUseProgram(program);
-    glEnable(GL_CULL_FACE);
-    glFrontFace(GL_CCW);
-    glCullFace(GL_BACK);
+//    glEnable(GL_CULL_FACE);
+//    glFrontFace(GL_CCW);
+//    glCullFace(GL_BACK);
 }
 
 void SimpleShapeApplication::frame() {
 //    draw objects
 //-----------------------------------------------------------------------
 
-    pyramid_->draw();
+    quad->draw();
 //    Calculate camera changes
 //-----------------------------------------------------------------------
     glBindBuffer(GL_UNIFORM_BUFFER, pvm_buff_handle);
@@ -134,4 +134,8 @@ void SimpleShapeApplication::cursor_position_callback(double x, double y) {
     if (controller_) {
         controller_->mouse_moved(x, y);
     }
+}
+
+void SimpleShapeApplication::cleanup() {
+    quad.reset();
 }
