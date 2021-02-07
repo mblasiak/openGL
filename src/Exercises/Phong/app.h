@@ -77,9 +77,12 @@ private:
     std::shared_ptr<Quad> quad;
 
     struct Light {
+//        vec4 for easier mat4 multiplication
         glm::vec4 position;
         glm::vec4 color;
         glm::vec4 a;
+        glm::vec4 ambient_color;
+
     };
 
     Light light;
