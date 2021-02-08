@@ -55,7 +55,7 @@ private:
     GLuint pvm_buff_handle;
 
     glm::vec3 up = {0.0, 1.0, 0.0};
-    glm::vec3 eye = {+0.0, +8.0, -10.0};
+    glm::vec3 eye = {+0.0, +15.0, 0.000001};
     glm::vec3 center = {0.0, -0.0, -0.0};
 
     float fov = glm::radians(80.0);
@@ -90,12 +90,12 @@ private:
     double moon_scale = 2.0f;
 
     //    Satellite
-    const float satellite_rotation_period = 10.0f;
+    const float satellite_rotation_period = 2.0f;
     const double satellite_orbital_rotation_period = satellite_rotation_period;
     double satellite_orbital_rotation_angle;
     double satellite_orbital_pos_x;
     double satellite_orbital_pos_z;
-    double satellite_ellipse_r = 2.0f;
+    double satellite_ellipse_r = 1.5f;
     double satellite_scale = 4.0f;
 
 };

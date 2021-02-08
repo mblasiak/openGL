@@ -98,10 +98,6 @@ void SimpleShapeApplication::frame() {
     PVM = glm::mat4(camera_->projection() * camera_->view() * M * planet_m);
     glBufferSubData(GL_UNIFORM_BUFFER, 0, 16 * sizeof(float), &PVM[0]);
     pyramid_->draw();
-//Center
-    PVM = glm::mat4(camera_->projection() * camera_->view() * M);
-    glBufferSubData(GL_UNIFORM_BUFFER, 0, 16 * sizeof(float), &PVM[0]);
-    pyramid_->draw();
 //Moon
     auto moon_rotation_angle = 2.0f * glm::pi<float>() * elapsed_time / moon_rotation_period;
     auto moon_rotation_m = glm::rotate(glm::mat4(1.0f), -moon_rotation_angle, {0.0, 1.00, 0.0});
